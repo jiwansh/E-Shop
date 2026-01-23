@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import com.jiwanshu.ecom.repositories.CategoryRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImple implements CategoryService{

@@ -1,4 +1,4 @@
-package com.ecommerce.project.security.request;
+package com.jiwanshu.ecom.security.request;
 
 import java.util.Set;
 

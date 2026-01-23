@@ -1,6 +1,5 @@
 package com.jiwanshu.ecom.service;
 
-import com.jiwanshu.ecom.model.Product;
 import com.jiwanshu.ecom.payload.ProductDTO;
 import com.jiwanshu.ecom.payload.ProductResponse;
 import org.springframework.web.multipart.MultipartFile;

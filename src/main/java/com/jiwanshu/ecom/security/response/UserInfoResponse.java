@@ -1,4 +1,4 @@
-package com.ecommerce.project.security.response;
+package com.jiwanshu.ecom.security.response;
 
 import java.util.List;
 

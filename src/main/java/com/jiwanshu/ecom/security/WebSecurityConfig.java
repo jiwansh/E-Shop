@@ -1,8 +1,16 @@
 package com.jiwanshu.ecom.security;
 
 
+import com.jiwanshu.ecom.model.AppRole;
+import com.jiwanshu.ecom.model.Role;
+import com.jiwanshu.ecom.model.User;
+import com.jiwanshu.ecom.repositories.RoleRepository;
+import com.jiwanshu.ecom.repositories.UserRepository;
+import com.jiwanshu.ecom.security.jwt.AuthEntryPointJwt;
+import com.jiwanshu.ecom.security.jwt.AuthTokenFilter;
 import com.jiwanshu.ecom.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +18,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
