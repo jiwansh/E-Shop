@@ -80,6 +80,11 @@ This project mimics how **enterprise systems are built iteratively**, not in one
 ✔ Spring Security integration  
 ✔ Role-based authorization  
 ✔ H2 / DB-backed development setup
+✔ 🔐 Authentication & Security
+-User registration & login
+- JWT-based authentication
+- Role-based access (Admin / User)
+- Secure API endpoints
 
 > The project is actively being built **module by module**.  
 > Each feature is added only after understanding its internal design.
@@ -88,11 +93,6 @@ This project mimics how **enterprise systems are built iteratively**, not in one
 
 ## 🧩 Features Planned (Incremental)
 
-### 🔐 Authentication & Security
-- User registration & login
-- JWT-based authentication
-- Role-based access (Admin / User)
-- Secure API endpoints
 
 ### 🛒 eCommerce Core
 - Category & Product Management
