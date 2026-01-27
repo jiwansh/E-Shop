@@ -61,6 +61,7 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 
@@ -92,6 +93,8 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+
+    // complete bypass security at global level
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring().requestMatchers("/v2/api-docs",

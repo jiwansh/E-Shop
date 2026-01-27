@@ -60,6 +60,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         // 1️⃣ Try cookie
         String jwt = jwtUtils.getJwtFromCookies(request);
         if (jwt != null) {
+            logger.debug("AuthTokenFilter.java: {}", jwt);
             return jwt;
         }
 
