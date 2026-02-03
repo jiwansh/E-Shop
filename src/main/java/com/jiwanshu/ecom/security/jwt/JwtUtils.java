@@ -72,9 +72,14 @@ public class JwtUtils {
                 .getPayload().getSubject();
     }
 
+//    private Key key() {
+//        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+//    }
+
     private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+        return Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
+
 
     public boolean validateJwtToken(String authToken) {
         try {
@@ -90,6 +95,8 @@ public class JwtUtils {
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
+        System.out.println("JWT VALIDATED SUCCESSFULLY");
+
         return false;
     }
 }
