@@ -4,6 +4,10 @@ import com.jiwanshu.ecom.config.AppConstants;
 import com.jiwanshu.ecom.payload.CategoryDTO;
 import com.jiwanshu.ecom.payload.CategoryResponse;
 import com.jiwanshu.ecom.service.CategoryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +25,12 @@ public class CategoryController {
 
         this.categoryService = categoryService;
     }
-
+    // for swagger docs
+//    @Tag(name ="Category API", description = "Get all catefo")
+//    @Operation(summary = "Get category", description = "all apis")
+//    @ApiResponses({
+//           @ApiResponse(responseCode = "201", description = "category created successfully")
+//    })
     @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories(
             @RequestParam(name = "pageNumber",defaultValue = AppConstants.PAGE_NUMBER) Integer pageNumber,
@@ -31,7 +40,7 @@ public class CategoryController {
         CategoryResponse categoryResponse = categoryService.getAllCategories(pageNumber,pageSize,sortBy,sortOrder);
         return new ResponseEntity<>(categoryResponse,HttpStatus.OK);
     }
-    @PostMapping("/public/categories")
+  //  @Tag(name ="Category API", description = "Get all catefo")    @PostMapping("/public/categories")
     public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
         CategoryDTO savedCategoryDTO = categoryService.createCategory(categoryDTO);
         return new ResponseEntity<>(savedCategoryDTO,HttpStatus.CREATED);

@@ -18,7 +18,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
@@ -55,21 +54,25 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+//
+//    private String parseJwt(HttpServletRequest request) {
+//        String jwt = jwtUtils.getJwtFromCookies(request);
+//        logger.debug("AuthTokenFilter.java: {}", jwt);
+//        return jwt;
+//    }
+
 
     private String parseJwt(HttpServletRequest request) {
-        // 1️⃣ Try cookie
-        String jwt = jwtUtils.getJwtFromCookies(request);
-        if (jwt != null) {
-            logger.debug("AuthTokenFilter.java: {}", jwt);
-            return jwt;
+
+        String jwtFromCookies = jwtUtils.getJwtFromCookies(request);
+        if(jwtFromCookies != null) {
+            return jwtFromCookies;
         }
 
-        // 2️⃣ Try Authorization header
-        String headerAuth = request.getHeader("Authorization");
-        if (headerAuth != null && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7);
+        String jwtFromHeader = jwtUtils.getJwtFromHeader(request);
+        if(jwtFromHeader != null) {
+            return jwtFromHeader;
         }
-
         return null;
     }
 }
