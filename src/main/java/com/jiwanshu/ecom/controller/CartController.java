@@ -2,6 +2,7 @@ package com.jiwanshu.ecom.controller;
 
 import com.jiwanshu.ecom.model.Cart;
 import com.jiwanshu.ecom.payload.CartDTO;
+import com.jiwanshu.ecom.payload.CartItemDTO;
 import com.jiwanshu.ecom.repositories.CartRepository;
 import com.jiwanshu.ecom.service.CartService;
 import com.jiwanshu.ecom.util.AuthUtil;
@@ -23,6 +24,12 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @PostMapping("/cart/create")
+    public ResponseEntity<String> createOrUpdateCart(@RequestBody List<CartItemDTO> cartItems){
+        String response = cartService.createOrUpdateCartWithItems(cartItems);
+        return new ResponseEntity<String>(response, HttpStatus.CREATED);
+    }
 
     @PostMapping("/carts/products/{productId}/quantity/{quantity}")
     public ResponseEntity<CartDTO> addProductToCart(@PathVariable Long productId,

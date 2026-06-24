@@ -1,6 +1,7 @@
 package com.jiwanshu.ecom.service;
 
 import com.jiwanshu.ecom.payload.CartDTO;
+import com.jiwanshu.ecom.payload.CartItemDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface CartService {
     String deleteProductFromCart(Long cartId, Long productId);
 
     void updateProductInCarts(Long cartId, Long productId);
+
+    String createOrUpdateCartWithItems(List<CartItemDTO> cartItems);
 }
