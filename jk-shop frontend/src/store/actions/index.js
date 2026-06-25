@@ -245,18 +245,68 @@ export const addPaymentMethod = (method) => {
     }
 };
 
-
+// Creates cart in backend and then fetches latest cart data
 export const createUserCart = (sendCartItems) => async (dispatch, getState) => {
     try {
-        dispatch({ type: "IS_FETCHING" });
-        await api.post('/cart/create', sendCartItems);
-        await dispatch(getUserCart());
+        // Tell Redux that API call has started
+        // Used to show loaders/spinners in UI
+        dispatch({
+            type: "IS_FETCHING"
+        });
+        /*
+            API Call
+            POST /cart/create
+            sendCartItems Example:
+            [
+              {
+                productId: 1,
+                quantity: 2
+              },
+              {
+                productId: 5,
+                quantity: 1
+              }
+            ]
+
+            Backend:
+            CartService.createOrUpdateCartWithItems()
+        */
+        await api.post(
+            '/cart/create',
+            sendCartItems
+        );
+        /*
+            After cart is successfully created,
+            fetch latest cart from backend.
+            Why?
+            Backend may calculate:
+            - totalPrice
+            - cartId
+            - discounts
+            We want Redux store to have fresh data.
+        */
+        await dispatch(
+            getUserCart()
+        );
+
     } catch (error) {
+        // Debugging purpose
         console.log(error);
-        dispatch({ 
+        /*
+            If API fails:
+            Backend Error Example:
+            {
+                message: "Product not found"
+            }
+            Save error in Redux
+            so UI can display it.
+        */
+        dispatch({
             type: "IS_ERROR",
-            payload: error?.response?.data?.message || "Failed to create cart items",
-         });
+            payload:
+                error?.response?.data?.message ||
+                "Failed to create cart items",
+        });
     }
 };
 
